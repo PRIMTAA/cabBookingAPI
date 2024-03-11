@@ -27,31 +27,7 @@
             cursor: pointer;
         }
     </style>
-    <script>
-        function addFare() {
-            const from = document.getElementById('from').value;
-            const to = document.getElementById('to').value;
-            const fare = document.getElementById('fare').value;
 
-            const fareData = {
-                start: from,
-                end: to,
-                fare: parseInt(fare)
-            };
-
-            fetch('http://localhost:8080/fareAPI/addFare', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                },
-                body: JSON.stringify(fareData)
-            })
-            .then(response => response.text())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-        }
-    </script>
 </head>
 <body>
 
