@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Cab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Book Cab</h2>
+    <form method="post" action="http://localhost:8080/bookingAPI/createBooking" enctype="application/x-www-form-urlencoded">
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date">
+
+    <label for="from">From:</label>
+    <select id="from" name="start">
+        <!-- Add options for the 'From' dropdown as needed -->
+        <option th:each="from : ${from}" th:text="${from}"></option>
+
+        <!-- Add more options if required -->
+    </select>
+
+    <label for="to">To:</label>
+    <select id="to" name="end">
+        <!-- Add options for the 'To' dropdown as needed -->
+        <option th:each="to : ${to}" th:text="${to}">
+
+        <!-- Add more options if required -->
+    </select>
+
+    <label for="vehicle">Vehicle:</label>
+    <select id="vehicle" name="vechName">
+        <!-- Add options for the 'Vehicle' dropdown as needed -->
+        <option th:each="vechName : ${vechNames}" th:text="${vechName}"></option>
+
+
+        <!-- Add more options if required -->
+    </select>
+
+    <label for="customerName">Customer Name:</label>
+    <input type="text" id="customerName" placeholder="Enter customer name" name="customerName">
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" placeholder="Enter phone number" name="phone">
+
+    <input type="submit" value="submit">
+    </form>
+    <script>
+        function bookCab() {
+            var date = document.getElementById('date').value;
+            var from = document.getElementById('from').value;
+            var to = document.getElementById('to').value;
+            var vehicle = document.getElementById('vehicle').value;
+            var customerName = document.getElementById('customerName').value;
+            var phone = document.getElementById('phone').value;
+
+            // You can use the values as needed, for example, display or process them.
+            console.log('Date:', date);
+            console.log('From:', from);
+            console.log('To:', to);
+            console.log('Vehicle:', vehicle);
+            console.log('Customer Name:', customerName);
+            console.log('Phone:', phone);
+        }
+    </script>
+
+</body>
+</html>
