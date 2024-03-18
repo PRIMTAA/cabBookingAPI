@@ -47,7 +47,8 @@ public class FareManager {
         return cabFaresService.updateFare(id,cabFareDTO.getFare());
     }
     @DeleteMapping("/deleteFare/{id}")
-    String deleteFare(@PathVariable int id){
-        return cabFaresService.deleteFare(id);
+    public void deleteFare(@PathVariable int id) {
+         cabFaresService.deleteFare(id);
+//        return "redirect:/fareAPI/cabFares";
     }
 }

@@ -32,6 +32,20 @@
             color: white;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:inline="javascript">
+        function deleteVehicle(VehicleId) {
+    axios.delete(`/vehicleAPI/deleteVehicle/${VehicleId}`)
+        .then(response => {
+            console.log('Fare deleted successfully');
+            // Optionally, you can reload the page or update the UI
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Error deleting fare:', error);
+        });
+}
+    </script>
 </head>
 <body>
 
@@ -50,6 +64,7 @@
                 <th>OwnerName</th>
                 <th>Seats</th>
                 <th>Phone</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -62,6 +77,9 @@
                 <td th:text="${vehicle.ownerName}"></td>
                 <td th:text="${vehicle.seats}"></td>
                 <td th:text="${vehicle.phone}"></td>
+                <td>
+                    <button th:onclick="'deleteVehicle(' + ${vehicle.vId} + ')'">Delete</button>
+                </td>
             </tr>
         </tbody>
     </table>

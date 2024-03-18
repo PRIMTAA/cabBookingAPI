@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fare Management</title>
+    <!-- Existing styles -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,35 +33,52 @@
             color: white;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:inline="javascript">
+        function deleteFare(fareId) {
+    axios.delete(`/fareAPI/deleteFare/${fareId}`)
+        .then(response => {
+            console.log('Fare deleted successfully');
+            // Optionally, you can reload the page or update the UI
+            location.reload();
+        })
+        .catch(error => {
+            console.error('Error deleting fare:', error);
+        });
+}
+    </script>
 </head>
 <body>
 
-    <h2>Fare Management</h2>
-    <form action="http://localhost:8080/fareAPI/addFare" method="get">
-        <input type="submit" value="add new Fare">
-    </form>
+<h2>Fare Management</h2>
+<form action="http://localhost:8080/fareAPI/addFare" method="get">
+    <input type="submit" value="add new Fare">
+</form>
 
-
-    <table id="fareTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Fare</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Table rows will be dynamically added here -->
-            <tr th:each="fare : ${fareList}">
-                <!-- Display data in table cells -->
-                <td th:text="${fare.id}"></td>
-                <td th:text="${fare.start}"></td>
-                <td th:text="${fare.end}"></td>
-                <td th:text="${fare.fare}"></td>
-            </tr>
-        </tbody>
-    </table>
+<table id="fareTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Fare</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Table rows will be dynamically added here -->
+    <tr th:each="fare : ${fareList}">
+        <!-- Display data in table cells -->
+        <td th:text="${fare.id}"></td>
+        <td th:text="${fare.start}"></td>
+        <td th:text="${fare.end}"></td>
+        <td th:text="${fare.fare}"></td>
+        <td>
+            <button th:onclick="'deleteFare(' + ${fare.id} + ')'">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
